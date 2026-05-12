@@ -19,12 +19,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    # Third-party apps
+    "corsheaders",
     'rest_framework',
     'rest_framework_simplejwt',
-    'corsheaders',
     'django_summernote',
 
+    # Local apps
     "core",
     "accounts",
     "authcodes",
@@ -34,8 +35,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -161,6 +162,8 @@ CORS_ALLOWED_ORIGINS = [x.strip() for x in _cors_origins_raw if x and x.strip()]
 CORS_ALLOW_CREDENTIALS = config('CORS_ALLOW_CREDENTIALS', default=not IS_PRODUCTION, cast=bool)
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS']
 CORS_ALLOW_HEADERS = ['Content-Type', 'Authorization']
+# Optionally allow all origins (useful for some dev setups). Prefer explicit origins in production.
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
 
 _csrf_origins_raw = config(
     'CSRF_TRUSTED_ORIGINS',
