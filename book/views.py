@@ -145,10 +145,13 @@ class PublicationExtractionView(APIView):
             return err
         existing = PublicationTextExtraction.objects.filter(book=book).first()
         if not existing:
-            return Response(
-                {"message": "No extraction found"},
-                status=status.HTTP_404_NOT_FOUND,
-            )
+            return Response({
+                "book_id": pk,
+                "arabic_text": None,
+                "summary": None,
+                "created_at": None,
+                "updated_at": None,
+            })
         return Response({
             "book_id": book.id,
             "arabic_text": existing.arabic_text,
