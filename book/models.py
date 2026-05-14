@@ -14,7 +14,7 @@ class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='books')
 
     title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
+    author = models.CharField(max_length=255, blank=True)
     publisher = models.CharField(max_length=255, blank=True)
     edition = models.CharField(max_length=100, blank=True)
     year = models.CharField(max_length=10, blank=True)
